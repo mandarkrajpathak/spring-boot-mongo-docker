@@ -17,10 +17,10 @@ node{
     }
     
     stage('Push Docker Image'){
-        withCredentials([string(credentialsId: 'DOKCER_HUB_PASSWORD', variable: 'DOKCER_HUB_PASSWORD')]) {
-          sh "docker login -u mandarkrajpathak -p ${'J@nuary@2019'}"
-        }
-        sh 'docker push dockerhandson/spring-boot-mongo'
+        docker.withRegistry('https://registry.hub.docker.com', 'mandarkrajpathak') {
+                        app.push("${env.BUILD_NUMBER}")
+                        app.push("latest")
+                    }
      }
      
      stage("Deploy To Kuberates Cluster"){
