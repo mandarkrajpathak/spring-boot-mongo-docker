@@ -1,5 +1,6 @@
-node{
-     
+pipeline{
+     agent any
+     stages{
     stage('SCM Checkout'){
         git credentialsId: 'GIT_CREDENTIALS', url:  'https://github.com/MithunTechnologiesDevOps/spring-boot-mongo-docker.git',branch: 'master'
     }
@@ -24,7 +25,7 @@ node{
         sh 'docker push dockerhandson/spring-boot-mongo'
     **/
         docker.withRegistry('https://registry.hub.docker.com', 'mandarkrajpathak') {
-                        sh 'docker push mandarkrajpathak/spring-boot-mongo'
+                        sh 'docker push dockerhandson/spring-boot-mongo'
                     }
      }
      
@@ -40,6 +41,7 @@ node{
       stage("Deploy To Kuberates Cluster"){
         sh 'kubectl apply -f pringBootMongo.yml'
       } **/
+      }
      
 }
 
