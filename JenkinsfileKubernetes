@@ -17,14 +17,11 @@ node{
         /**sh 'docker build -t mandarkrajpathak/spring-boot-mongo .'
 	app = docker.build(DOCKER_IMAGE_NAME)**/
 	
-	steps {
-                script {
-                    app = docker.build("mandarkrajpathak/spring-boot-mongo")
+	 app = docker.build("mandarkrajpathak/spring-boot-mongo")
                     app.inside {
                         sh 'echo Hello, World!'
                     }
-                }
-            }
+
     }
     
     stage('Push Docker Image'){
