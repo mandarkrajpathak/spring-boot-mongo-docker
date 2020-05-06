@@ -2,7 +2,7 @@ node{
      
      environment {
         //be sure to replace "willbla" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "mandarkrajpathak/spring-boot-mongo ."
+        DOCKER_IMAGE_NAME = "mandarkrajpathak/spring-boot-mongo"
     }
      
     stage('SCM Checkout'){
