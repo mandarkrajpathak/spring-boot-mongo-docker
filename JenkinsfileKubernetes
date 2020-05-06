@@ -14,8 +14,17 @@ node{
     
     
     stage('Build Docker Image'){
-        sh 'docker build -t mandarkrajpathak/spring-boot-mongo .'
-	/**app = docker.build(DOCKER_IMAGE_NAME)**/
+        /**sh 'docker build -t mandarkrajpathak/spring-boot-mongo .'
+	app = docker.build(DOCKER_IMAGE_NAME)**/
+	
+	steps {
+                script {
+                    app = docker.build(mandarkrajpathak/spring-boot-mongo)
+                    app.inside {
+                        sh 'echo Hello, World!'
+                    }
+                }
+            }
     }
     
     stage('Push Docker Image'){
@@ -26,7 +35,10 @@ node{
         sh 'docker push mandarkrajpathak/spring-boot-mongo'**/
     
         docker.withRegistry('https://registry.hub.docker.com', 'mandarkrajpathak') {
-                        sh 'docker push mandarkrajpathak/spring-boot-mongo .'
+                        /**sh 'docker push mandarkrajpathak/spring-boot-mongo'**/
+			
+			app.push("${env.BUILD_NUMBER}")
+                        app.push("latest")
 	
                     }
      }
