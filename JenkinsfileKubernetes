@@ -1,5 +1,10 @@
 node{
      
+     environment {
+        //be sure to replace "willbla" with your own Docker Hub username
+        DOCKER_IMAGE_NAME = "mandarkrajpathak/spring-boot-mongo ."
+    }
+     
     stage('SCM Checkout'){
         git credentialsId: 'GIT_CREDENTIALS', url:  'https://github.com/MithunTechnologiesDevOps/spring-boot-mongo-docker.git',branch: 'master'
     }
@@ -13,7 +18,8 @@ node{
     
     
     stage('Build Docker Image'){
-        sh 'docker build -t mandarkrajpathak/spring-boot-mongo .'
+        /**sh 'docker build -t mandarkrajpathak/spring-boot-mongo .'**/
+	app = docker.build(DOCKER_IMAGE_NAME)
     }
     
     stage('Push Docker Image'){
