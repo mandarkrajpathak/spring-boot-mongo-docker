@@ -19,7 +19,7 @@ node{
 	
 	steps {
                 script {
-                    app = docker.build(mandarkrajpathak/spring-boot-mongo)
+                    app = docker.build('mandarkrajpathak/spring-boot-mongo')
                     app.inside {
                         sh 'echo Hello, World!'
                     }
